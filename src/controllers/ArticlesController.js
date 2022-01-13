@@ -21,22 +21,53 @@ const getArticleById = (req, res) => {
 };
 
 const addArticle = (req, res) => {
-    const { title, image, description } = req.body;
-    const article = {
-        id: articles.length + 1,
-        title: title,
-        image: image,
-        description: description,
-    };
-    articles.push(article);
-    res.json({
-        message: "Article added successfully",
-        article,
-    });
-}
+  const { title, image, description } = req.body;
+  const article = {
+    id: articles.length + 1,
+    title: title,
+    image: image,
+    description: description,
+  };
+  articles.push(article);
+  res.json({
+    message: "Article added successfully",
+    article,
+  });
+};
 
 //Update Article
-
+const updateArticleById = (req, res) => {
+  const { id } = req.params;
+  const article = articles.findIndex((article) => article.id === Number(id));
+  const { title, image, description } = req.body;
+  const updatedArticle = articles.splice(article, 1, {
+    title,
+    image,
+    description,
+  });
+  res.json({
+    message: "Article updated successfully",
+    updatedArticle,
+  });
+};
 //Delete Article
 
-export default { getAllArticles, getArticleById, addArticle };
+const deleteArticleById = (req, res) => {
+  const { id } = req.params;
+
+  const article = articles.findIndex((article) => article.id === Number(id));
+
+  const deletedArticle = articles.splice(article, 1);
+  res.json({
+    message: "Article deleted successfully",
+    deletedArticle,
+  });
+};
+
+export default {
+  getAllArticles,
+  getArticleById,
+  addArticle,
+  updateArticleById,
+  deleteArticleById,
+};
