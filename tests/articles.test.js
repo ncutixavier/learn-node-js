@@ -5,6 +5,8 @@ import "dotenv/config";
 
 use(chaiHttp);
 
+console.log(process.env.TEST_DB);
+
 describe("ARTICLE END-POINT TESTING", () => {
   it("Should retrieve the articles", async () => {
     const res = await request(app).get("/api/v1/articles/");
