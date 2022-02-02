@@ -1,28 +1,44 @@
 import express from "express";
-import bodyParser from "body-parser";
-import cors from "cors";
+import mongoose from "mongoose";
+import routes from "./routes/index.js";
 import morgan from "morgan";
-import ArticlesRoute from "./routes/ArticlesRoute";
-
-require('dotenv').config();
+import cors from "cors";
+import "dotenv/config";
 
 const app = express();
-app.use(bodyParser.json());
-app.use(cors());
-app.use(morgan("dev"));
 
-app.get("/", (req, res) => {
-    res.json({
-        message: "Learn Node.js with friends"
-    })
-})
+const port = process.env.PORT || 3000;
+const mode = process.env.NODE_ENV || "development";
 
-app.use("/api/v1/articles", ArticlesRoute);
-
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
-});
+try {
+  if (mode === "development") {
+    mongoose
+      .connect(process.env.DEVELOPMENT_DB, { useNewUrlParser: true })
+      .then((result) => {
+        console.log("DEV DB Connected");
+      });
+  } else if (mode === "test") {
+    mongoose
+      .connect(process.env.TEST_DB, { useNewUrlParser: true })
+      .then((result) => {
+        console.log("TEST DB Connected");
+      });
+  } else if (mode === "production") {
+    mongoose
+      .connect(process.env.PRODUCTION_DB, { useNewUrlParser: true })
+      .then((result) => {
+        console.log("PROD DB Connected");
+      });
+  }
+  app.use(express.json());
+  app.use(morgan("dev"));
+  app.use(cors());
+  app.use("/api/v1/", routes);
+  app.listen(port, () => {
+    console.log(`The server is running on port ${port}`);
+  });
+} catch (error) {
+  console.log(error);
+}
 
 export default app;
