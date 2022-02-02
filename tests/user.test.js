@@ -6,13 +6,41 @@ import 'dotenv/config';
 use(chaiHttp)
 
 describe("USER END-POINT-TEST", () => {
-    // it("Should retrieve the articles", async () => {
-    //     const res = await request(app).get("/api/v1/aritcles/")
-    //     expect(res).to.have.status([200])
-    //     expect(res.type).to.have.equal("application/json")
-    // })
-    // it("Should not retrieve the articles", async () => {
-    //     const res = await request(app).get("/api/v1/aritcle/")
-    //     expect(res).to.have.status([404])
-    // })
+  it("Should not login", (done) => {
+    request(app)
+      .post("/api/v1/users/login")
+      .send({
+        email: "test",
+        password: "test",
+      })
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(403);
+        done();
+      });
+  });
+  it("Should login", (done) => {
+    request(app)
+      .post("/api/v1/users/login")
+      .send({
+        email: "ncuti65@gmail.com",
+        password: "Pass@123",
+      })
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        done();
+      });
+  });
+  it("Should not register user when email exist", (done) => {
+    request(app)
+      .post("/api/v1/users/register")
+      .send({
+        username: "test",
+        email: "ncuti65@gmail.com",
+        password: "Pass@123",
+      })
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(409);
+        done();
+      });
+  });
 })
