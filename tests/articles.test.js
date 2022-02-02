@@ -5,7 +5,7 @@ import "dotenv/config";
 
 use(chaiHttp);
 
-console.log(process.env.TEST_DB);
+console.log("PROCESS-ENV::", process.env.TEST_DB);
 
 describe("ARTICLE END-POINT TESTING", () => {
   it("Should retrieve the articles", async () => {
