@@ -9,8 +9,8 @@ on:
   pull_request:
     branches: [ dev ]
   env:
-    TEST_DB: mongodb+srv://ncutixavier:DebITMmwuSTlGiId@cluster0.o8egx.mongodb.net/testDB?retryWrites=true&w=majority
-    JWT_SECRETE: secrete-of-secrete
+    TEST_DB: ${{ secrets.TEST_DB }}
+    JWT_SECRETE: ${{ secrets.JWT_SECRETE }}
 jobs:
   build:
 
