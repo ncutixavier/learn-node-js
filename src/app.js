@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import routes from "./routes/index.js";
 import morgan from "morgan";
 import cors from "cors";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "../swagger.json";
 import "dotenv/config";
 
 const app = express();
@@ -33,7 +35,18 @@ try {
   app.use(express.json());
   app.use(morgan("dev"));
   app.use(cors());
+
+  app.get("/", (req, res) => {
+    res.json({ message: "Learn node js with express" });
+  });
+
   app.use("/api/v1/", routes);
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+  app.use("*", (req, res) => {
+    res.status(404).json({ message: "Not Found" });
+  });
+
   app.listen(port, () => {
     console.log(`The server is running on port ${port}`);
   });
