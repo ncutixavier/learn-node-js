@@ -24,11 +24,71 @@
         }
       }
     },
+    "/api/v1/users/login": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Login",
+        "description": "Login",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/v1/articles": {
       "get": {
         "tags": ["Articles"],
         "summary": "Get all articles",
         "description": "Get all articles",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Articles"],
+        "summary": "Create an article",
+        "description": "Create an article",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authorization",
+            "required": true
+          },
+          {
+            "name": "title",
+            "in": "formData",
+            "description": "Title of the article",
+            "required": true
+          },
+          {
+            "name": "content",
+            "in": "formData",
+            "description": "Content of the article",
+            "required": true
+          },
+          {
+            "name": "image",
+            "in": "formData",
+            "type": "file",
+            "description": "Image of the article",
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success"
@@ -54,6 +114,19 @@
           "200": {
             "description": "Success"
           }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Login": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
         }
       }
     }
