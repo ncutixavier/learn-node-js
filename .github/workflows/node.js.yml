@@ -37,7 +37,7 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
   coverage:
-    needs: [ test ]
+    needs: [ build ]
     name: coverage
     runs-on: ubuntu-latest
     steps:
