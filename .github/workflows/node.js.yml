@@ -36,3 +36,20 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
+  coverage:
+    needs: [ test ]
+    name: coverage
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@master
+      with:
+        node-version: '12'
+    - run: npm install -g yarn
+    - run: yarn install
+    - run: yarn build
+    - uses: paambaati/codeclimate-action@v2.2.4
+      env:
+        CC_TEST_REPORTER_ID: ${{ secrets.TEST_REPORTER }}
+      with:
+        coverageCommand: yarn coverage
