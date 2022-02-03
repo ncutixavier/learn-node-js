@@ -47,7 +47,7 @@
             "in": "path",
             "description": "Article id",
             "required": true,
-            "type": "integer"
+            "type": "string"
           }
         ],
         "responses": {
