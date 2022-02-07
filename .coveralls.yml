@@ -1,1 +1,1 @@
-repo_token: tZq6cU7ufS8xQxbckGBXmCiii2XakrkMN
+repo_token: ${{ secrets.REPO_TOKEN }}
