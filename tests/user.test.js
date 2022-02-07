@@ -34,7 +34,7 @@ describe("USER END-POINT-TEST", () => {
     request(app)
       .post("/api/v1/users/register")
       .send({
-        username: "test",
+        username: "testing",
         email: "ncuti65@gmail.com",
         password: "Pass@123",
       })

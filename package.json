@@ -8,7 +8,7 @@
     "start": "npm run build && better-npm-run prod",
     "dev": "better-npm-run dev",
     "test": "better-npm-run test",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "better-npm-run test"
   },
   "betterScripts": {
     "dev": {
@@ -58,6 +58,7 @@
     "cors": "^2.8.5",
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
+    "jest": "^27.5.0",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.8",
