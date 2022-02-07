@@ -26,7 +26,7 @@
       }
     },
     "coverage": {
-      "command": "npm run test && nyc report --reporter=text-lcov | coveralls",
+      "command": "nyc report --reporter=text-lcov | coveralls",
       "env": {
         "NODE_ENV": "test",
         "PORT": 5000

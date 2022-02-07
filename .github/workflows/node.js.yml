@@ -52,4 +52,4 @@ jobs:
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.TEST_REPORTER }}
       with:
-        coverageCommand: yarn coverage
+        coverageCommand: npm run coverage
